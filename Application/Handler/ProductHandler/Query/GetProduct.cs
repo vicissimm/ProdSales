@@ -9,7 +9,7 @@ namespace Application.Handler.ProductHandler.Query
     public class GetProductQuery : IQuery<Product>
     {
         public int Id { get; set; }
-        public string AccessToken { get; set; } = string.Empty;
+        public int UserId { get; set; }
     }
     public class GetProduct : IQueryHandler<GetProductQuery, Product>
     {
@@ -24,7 +24,7 @@ namespace Application.Handler.ProductHandler.Query
 
         public async Task<Product> HandleAsync(GetProductQuery query, CancellationToken cancellationToken = default)
         {
-            var product = await _productRepository.GetProductById(query.Id, query.AccessToken);
+            var product = await _productRepository.GetProductById(query.Id, query.UserId);
             var productDto = _mapper.Map<Product>(product);
             return productDto;
         }

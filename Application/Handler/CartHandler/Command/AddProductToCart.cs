@@ -11,7 +11,7 @@ namespace Application.Handler.CartHandler.Command
     public class AddProductToCartCommand : ICommand
     {
         public CartDto Cart { get; set; } = default!;
-        public string AccessToken { get; set; } = string.Empty;
+        public int UserId { get; set; }
     }
     public class AddProductToCart : ICommandHandler<AddProductToCartCommand>
     {
@@ -25,7 +25,7 @@ namespace Application.Handler.CartHandler.Command
         public async Task HandleAsync(AddProductToCartCommand command, CancellationToken cancellationToken = default)
         {
             var product = _mapper.Map<Cart>(command.Cart);
-            await _cartRepository.AddProductToCart(product, command.AccessToken);
+            await _cartRepository.AddProductToCart(product, command.UserId);
         }
     }
 }

@@ -26,8 +26,25 @@ namespace ProdSales.Controllers
 
         public async Task<IActionResult> GetProductsInCart([FromHeader] string accessToken)
         {
+            HttpContext context = HttpContext;
+
+            if (!context.Items.ContainsKey("UserId"))
+            {
+                return Unauthorized();
+            }
+
+            var userId = context.Items["UserId"] as int?;
+
+            if (!userId.HasValue)
+            {
+                // UserId is null, handle the scenario gracefully (e.g., log and return an error response)
+                Console.WriteLine("UserId is null in AddProductInCart method.");
+                return BadRequest("UserId is null.");
+            }
+
             var query = new GetProductsInCartQuery();
-            query.AccessToken = accessToken;
+
+            query.UserId = userId.Value;
 
             var products = await _queryDispatcher.QueryAsync(query);
             return Ok(products);
@@ -35,11 +52,28 @@ namespace ProdSales.Controllers
 
         [HttpPost]
 
-        public async Task<IActionResult> AddProductInCart([FromBody] CartDto cart ,[FromHeader] string accessToken)
+        public async Task<IActionResult> AddProductInCart([FromBody] CartDto cart, [FromHeader] string accessToken)
         {
+            HttpContext context = HttpContext;
+
+            if (!context.Items.ContainsKey("UserId"))
+            {
+                return Unauthorized();
+            }
+
+            var userId = context.Items["UserId"] as int?;
+
+            if (!userId.HasValue)
+            {
+                // UserId is null, handle the scenario gracefully (e.g., log and return an error response)
+                Console.WriteLine("UserId is null in AddProductInCart method.");
+                return BadRequest("UserId is null.");
+            }
+
             var command = new AddProductToCartCommand();
             command.Cart = cart;
-            command.AccessToken = accessToken;
+
+            command.UserId = userId.Value;
 
             await _commandDispatcher.SendAsync(command);
             return Ok();
@@ -49,9 +83,25 @@ namespace ProdSales.Controllers
 
         public async Task<IActionResult> DeleteProductInCart(DeleteProductFromCartRoute route, [FromHeader] string accessToken)
         {
+            HttpContext context = HttpContext;
+
+            if (!context.Items.ContainsKey("UserId"))
+            {
+                return Unauthorized();
+            }
+
+            var userId = context.Items["UserId"] as int?;
+
+            if (!userId.HasValue)
+            {
+                // UserId is null, handle the scenario gracefully (e.g., log and return an error response)
+                Console.WriteLine("UserId is null in AddProductInCart method.");
+                return BadRequest("UserId is null.");
+            }
             var command = new DeleteProductFromCartCommand();
-            command.AccessToken = accessToken;
             command.Product = route;
+
+            command.UserId = userId.Value;
 
             await _commandDispatcher.SendAsync(command);
             return Ok();

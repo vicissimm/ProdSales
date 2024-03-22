@@ -1,13 +1,9 @@
 ﻿using Domain.Entities;
 using Domain.Interfaces;
 using Infrastructure.DataContext;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace Infrastructure.Repository
 {
@@ -15,46 +11,36 @@ namespace Infrastructure.Repository
     {
         private readonly ProdSalesContext _context;
 
-        public CartRepository(ProdSalesContext context)
+        public CartRepository(ProdSalesContext context, IHttpContextAccessor httpContextAccessor)
         {
             _context = context;
+
         }
-        public async Task AddProductToCart(Cart cart, string accessToken)
+        public async Task AddProductToCart(Cart cart, int userId)
         {
-            var userId = GetUserIdFromToken(accessToken);
             cart.UserId = userId;
 
             await _context.AddAsync(cart);
             await _context.SaveChangesAsync();
         }
 
-        public async Task DeleteProductFromCart(string accessToken, int productId)
+        public async Task DeleteProductFromCart(int userId, int productId)
         {
-            var userId = GetUserIdFromToken(accessToken);
-            var product = await _context.Carts.FirstOrDefaultAsync(p => p.ProductId == productId);
+            
+            var product = await _context.Carts.FirstOrDefaultAsync(p => p.Id == productId);
 
             _context.Remove(product);
             await _context.SaveChangesAsync();
         }
 
-        public async Task<List<Product>> GetProductsInCart(string accessToken)
+        public async Task<List<Product>> GetProductsInCart(int userId)
         {
-            var userId = GetUserIdFromToken(accessToken);
             var productsInCart = await _context.Carts
                 .Where(c => c.UserId == userId)
                 .Select(c => c.Product)
                 .ToListAsync();
 
             return productsInCart;
-        }
-
-        public int GetUserIdFromToken(string token)
-        {
-            var configurationManager = new ConfigurationManager();
-            var auth = new Authorization(configurationManager);
-            var userObj = auth.DecodeAccessToken(token);
-
-            return userObj.Id;
         }
     }
 }

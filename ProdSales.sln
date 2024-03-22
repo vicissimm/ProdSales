@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34511.84
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProdSales", "ProdSales\ProdSales.csproj", "{F054F960-59FD-4DF2-B3BC-A8E73E0132F9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProdSales", "ProdSales\ProdSales.csproj", "{F054F960-59FD-4DF2-B3BC-A8E73E0132F9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application", "Application\Application.csproj", "{5C647172-31A3-4B08-8478-B750F48B8DA7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Application", "Application\Application.csproj", "{5C647172-31A3-4B08-8478-B750F48B8DA7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "Domain\Domain.csproj", "{9275C2E4-30C0-4EA8-868B-2E97D37CF3EB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain", "Domain\Domain.csproj", "{9275C2E4-30C0-4EA8-868B-2E97D37CF3EB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure", "Infrastructure\Infrastructure.csproj", "{43A951F9-C897-45CB-865B-AFD0D7CA3245}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infrastructure", "Infrastructure\Infrastructure.csproj", "{43A951F9-C897-45CB-865B-AFD0D7CA3245}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

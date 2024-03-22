@@ -11,7 +11,7 @@ namespace Application.Handler.CartHandler.Query
 {
     public class GetProductsInCartQuery : IQuery<List<Product>>
     {
-        public string AccessToken { get; set; } = string.Empty;
+        public int UserId { get; set; }
     }
     public class GetProductsInCart : IQueryHandler<GetProductsInCartQuery, List<Product>>
     {
@@ -22,7 +22,7 @@ namespace Application.Handler.CartHandler.Query
         }
         public async Task<List<Product>> HandleAsync(GetProductsInCartQuery query, CancellationToken cancellationToken = default)
         {
-            return await _cartRepository.GetProductsInCart(query.AccessToken);
+            return await _cartRepository.GetProductsInCart(query.UserId);
         }
     }
 }

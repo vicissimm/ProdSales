@@ -9,7 +9,8 @@ namespace Application.Handler.ProductHandler.Command
     public class UpdateProductCommand : ICommand
     {
         public ProductDto Product { get; set; } = default!;
-        public string AccessToken { get; set; } = string.Empty;
+        public int UserId { get; set; }
+
     }
     public class UpdateProduct : ICommandHandler<UpdateProductCommand>
     {
@@ -26,7 +27,7 @@ namespace Application.Handler.ProductHandler.Command
         {
             var product = _mapper.Map<Product>(command.Product);
 
-            await _productRepository.UpdateProduct(product, command.AccessToken);
+            await _productRepository.UpdateProduct(product, command.UserId);
         }
     }
 }

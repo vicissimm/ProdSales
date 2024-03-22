@@ -22,6 +22,8 @@ namespace Application
 
             }).CreateMapper());
 
+            services.AddHttpContextAccessor();
+
             var builder = services.AddConvey()
                 .AddQueryHandlers()
                 .AddInMemoryQueryDispatcher()

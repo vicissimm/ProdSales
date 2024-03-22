@@ -3,6 +3,7 @@ using Infrastructure.Repository;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Infrastructure.DataContext;
+using Microsoft.AspNetCore.Http;
 
 namespace Infrastructure
 {
@@ -16,6 +17,7 @@ namespace Infrastructure
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<ICartRepository, CartRepository>();
             services.AddSingleton<IPasswordHasher, PasswordHasher>();
+            services.AddSingleton<Authorization>();
 
 
             services.AddDbContext<ProdSalesContext>(options =>

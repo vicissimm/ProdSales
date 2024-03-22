@@ -12,7 +12,7 @@ namespace Application.Handler.CartHandler.Command
     public class DeleteProductFromCartCommand : ICommand
     {
         public DeleteProductFromCartRoute Product { get; set; }
-        public string AccessToken { get; set; } = string.Empty;
+        public int UserId { get; set; }
     }
     public class DeleteProductFromCart : ICommandHandler<DeleteProductFromCartCommand>
     {
@@ -23,7 +23,7 @@ namespace Application.Handler.CartHandler.Command
         }
         public async Task HandleAsync(DeleteProductFromCartCommand command, CancellationToken cancellationToken = default)
         {
-            await _cartRepository.DeleteProductFromCart(command.AccessToken, command.Product.Id);
+            await _cartRepository.DeleteProductFromCart(command.UserId, command.Product.Id);
         }
     }
 }

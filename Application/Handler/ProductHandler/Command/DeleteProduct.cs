@@ -10,7 +10,8 @@ namespace Application.Handler.ProductHandler.Command
     public class DeleteProductCommand : ICommand
     {
         public DeleteProductRoute Product { get; set; } = default!;
-        public string AccessToken { get; set; } = string.Empty;
+        public int UserId { get; set; }
+
     }
     public class DeleteProduct : ICommandHandler<DeleteProductCommand>
     {
@@ -25,7 +26,7 @@ namespace Application.Handler.ProductHandler.Command
 
         public async Task HandleAsync(DeleteProductCommand command, CancellationToken cancellationToken = default)
         {
-            await _productRepository.DeleteProduct(command.Product.Id, command.AccessToken);
+            await _productRepository.DeleteProduct(command.Product.Id, command.UserId);
         }
     }
 

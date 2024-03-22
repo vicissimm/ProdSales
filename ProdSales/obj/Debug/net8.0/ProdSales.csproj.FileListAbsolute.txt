@@ -127,3 +127,4 @@ C:\Users\Armen\source\repos\ProdSales\ProdSales\bin\Debug\net8.0\Convey.CQRS.Com
 C:\Users\Armen\source\repos\ProdSales\ProdSales\bin\Debug\net8.0\Convey.CQRS.Queries.dll
 C:\Users\Armen\source\repos\ProdSales\ProdSales\bin\Debug\net8.0\Figgle.dll
 C:\Users\Armen\source\repos\ProdSales\ProdSales\bin\Debug\net8.0\Scrutor.dll
+C:\Users\Armen\source\repos\ProdSales\ProdSales\obj\Debug\net8.0\ProdSales.sourcelink.json

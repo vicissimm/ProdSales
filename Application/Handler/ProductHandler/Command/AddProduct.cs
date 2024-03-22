@@ -10,7 +10,8 @@ namespace Application.Handler.ProductHandler.Command
     public class AddProductCommand : ICommand
     {
         public ProductDto Product { get; set; } = default!;
-        public string AccessToken { get; set; } = string.Empty;
+        public int UserId { get; set; }
+        public bool IsAdmin { get; set; }
     }
     public class AddProduct : ICommandHandler<AddProductCommand>
     {
@@ -26,7 +27,7 @@ namespace Application.Handler.ProductHandler.Command
         public async Task HandleAsync(AddProductCommand command, CancellationToken cancellationToken = default)
         {
             var product = _mapper.Map<Product>(command.Product);
-            await _productRepostory.CreateProduct(product, command.AccessToken);
+            await _productRepostory.CreateProduct(product, command.UserId, command.IsAdmin);
         }
     }
    
